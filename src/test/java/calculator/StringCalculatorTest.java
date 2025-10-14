@@ -11,4 +11,11 @@ public class StringCalculatorTest {
         assertThat(StringCalculator.splitAndSum("")).isEqualTo(0);
         assertThat(StringCalculator.splitAndSum("    ")).isEqualTo(0);
     }
+
+    @Test
+    void 한가지_숫자_입력_테스트() {
+        assertThat(StringCalculator.splitAndSum("1")).isEqualTo(1);
+        assertThat(StringCalculator.splitAndSum("8")).isEqualTo(8);
+    }
+
 }
