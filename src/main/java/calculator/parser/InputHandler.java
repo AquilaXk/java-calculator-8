@@ -1,4 +1,4 @@
-package Parser;
+package calculator.parser;
 
 import camp.nextstep.edu.missionutils.Console;
 import java.util.regex.Pattern;
@@ -17,7 +17,14 @@ public class InputHandler {
 
 
     public InputHandler() {
-        this.originalInput = Console.readLine();
+        String firstLine = Console.readLine();
+        String lastLine;
+        if (firstLine.startsWith("//")) {
+            lastLine = firstLine + "\n" + Console.readLine();
+        } else {
+            lastLine = firstLine;
+        }
+        this.originalInput = lastLine;
     }
 
     public InputHandler(String input) {
