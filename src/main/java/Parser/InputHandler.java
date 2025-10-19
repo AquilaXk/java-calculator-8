@@ -7,30 +7,44 @@ import java.util.regex.Matcher;
 public class InputHandler {
 
     private static final String DEFAULT_DELIMITER = ",|:";
-    private String delimiter = DEFAULT_DELIMITER;
-    private String input;
+    private static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile("//(.)\n(.*)");
+
+    private final String originalInput;
+
+    private String finalDelimiter;
+    private String parsableInput;
+    private boolean isParsed = false;
+
 
     public InputHandler() {
-        input = Console.readLine();
+        this.originalInput = Console.readLine();
     }
 
     public InputHandler(String input) {
-        this.input = input;
+        this.originalInput = input;
     }
 
-    private void parseDelimiter() {
-        Pattern pattern = Pattern.compile("//(.)\n(.*)");
-        Matcher matcher = pattern.matcher(input);
+    private void parseInputAndDelimiter() {
+        if (isParsed) {
+            return;
+        }
+
+        Matcher matcher = CUSTOM_DELIMITER_PATTERN.matcher(originalInput);
 
         if (matcher.matches()) {
-            delimiter = matcher.group(1);
-            input = matcher.group(2);
+            this.finalDelimiter = Pattern.quote(matcher.group(1));
+            this.parsableInput = matcher.group(2);
+        } else {
+            this.finalDelimiter = DEFAULT_DELIMITER;
+            this.parsableInput = originalInput;
         }
+        this.isParsed = true;
     }
 
     public String[] parseTokens() {
-        parseDelimiter();
-        return input.split(Pattern.quote(delimiter));
+        parseInputAndDelimiter();
+
+        return parsableInput.split(finalDelimiter);
     }
 
 }
