@@ -18,12 +18,37 @@ class ApplicationTest extends NsTest {
 
 
     @Test
-    void 기본_구분자_사용() {
+    void 기본_구분자_사용_1() {
         assertSimpleTest(() -> {
             run("1:2:3");
             assertThat(output()).contains("결과값 : 6");
         });
     }
+
+    @Test
+    void 기본_구분자_사용_2() {
+        assertSimpleTest(() -> {
+            run("1,2:3,4");
+            assertThat(output()).contains("결과값 : 10");
+        });
+    }
+
+    @Test
+    void 빈_문자열_입력() {
+        assertSimpleTest(() -> {
+            run("   ");
+            assertThat(output()).contains("결과값 : 10");
+        });
+    }
+
+    @Test
+    void 숫자_0_입력() {
+        assertSimpleTest(() -> {
+            run("0");
+            assertThat(output()).contains("결과값 : 0");
+        });
+    }
+
 
     @Test
     void 예외_테스트() {

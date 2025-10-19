@@ -26,6 +26,16 @@ public class ValidatorTest {
     }
 
     @Test
+    void 공백_입력() {
+        String[] tokens = {" "};
+
+        assertThatThrownBy(
+                () -> Validator.validateAndConvert(tokens))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("빈 문자열을 입력했습니다.");
+    }
+
+    @Test
     void 문자_입력() {
         String[] tokens = {"World", "6", "Hello"};
 

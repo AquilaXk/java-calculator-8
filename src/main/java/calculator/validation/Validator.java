@@ -13,7 +13,7 @@ public class Validator {
     }
 
     private static int validateToken(String token) {
-        if (token.isEmpty()) {
+        if (token.trim().isEmpty() || token == null) {
             throw new IllegalArgumentException("빈 문자열을 입력했습니다.");
         }
 
