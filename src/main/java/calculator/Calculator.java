@@ -1,16 +1,19 @@
 package calculator;
 
 import java.util.List;
+import java.math.BigDecimal;
 
 
 public class Calculator {
 
 
-    public static int calculate(List<Integer> numbers) {
-        int sum = 0;
-        for (Integer number : numbers) {
-            sum += number;
+    public static BigDecimal calculate(List<BigDecimal> numbers) {
+        BigDecimal sum = BigDecimal.ZERO;
+
+        for (BigDecimal number : numbers) {
+            sum = sum.add(number);
         }
+
         return sum;
     }
 

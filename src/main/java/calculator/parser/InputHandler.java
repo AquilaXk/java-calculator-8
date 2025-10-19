@@ -1,10 +1,11 @@
 package calculator.parser;
 
-import camp.nextstep.edu.missionutils.Console;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 
+
 public class InputHandler {
+
 
     private static final String DEFAULT_DELIMITER = ",|:";
     private static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile("//(.)\n(.*)");
@@ -15,17 +16,6 @@ public class InputHandler {
     private String parsableInput;
     private boolean isParsed = false;
 
-
-    public InputHandler() {
-        String firstLine = Console.readLine();
-        String lastLine;
-        if (firstLine.startsWith("//")) {
-            lastLine = firstLine + "\n" + Console.readLine();
-        } else {
-            lastLine = firstLine;
-        }
-        this.originalInput = lastLine;
-    }
 
     public InputHandler(String input) {
         this.originalInput = input;
@@ -51,7 +41,10 @@ public class InputHandler {
     public String[] parseTokens() {
         parseInputAndDelimiter();
 
+        if (parsableInput.isEmpty()) {
+            return new String[]{""};
+        }
+
         return parsableInput.split(finalDelimiter);
     }
-
 }
