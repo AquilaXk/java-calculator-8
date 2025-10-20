@@ -13,7 +13,7 @@ class ApplicationTest extends NsTest {
     @Test
     void 커스텀_구분자_확인() {
         assertSimpleTest(() -> {
-            run("//;\n1;2;3");
+            run("//;\\n1;2;3");
             assertThat(output()).contains("결과값 : 6");
         });
     }
@@ -21,7 +21,7 @@ class ApplicationTest extends NsTest {
     @Test
     void 커스텀_구분자가_정규식() {
         assertSimpleTest(() -> {
-            run("//.\n1.2.3");
+            run("//.\\n1.2.3");
             assertThat(output()).contains("결과값 : 6");
         });
     }
@@ -81,8 +81,15 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    void 특수_입력() {
+        assertThatThrownBy(() -> runException("//"))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("정수가 아닌 값이 포함되어있습니다.");
+    }
+
+    @Test
     void 빈_문자열() {
-        assertThatThrownBy(() -> runException(""))
+        assertThatThrownBy(() -> runException(" "))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("빈 문자열을 입력했습니다.");
     }

@@ -18,6 +18,9 @@ public class InputHandler {
 
 
     public InputHandler(String input) {
+        if (input.contains("\\n")) {
+            input = input.replace("\\n", "\n");
+        }
         this.originalInput = input;
     }
 
@@ -41,10 +44,8 @@ public class InputHandler {
     public String[] parseTokens() {
         parseInputAndDelimiter();
 
-        if (parsableInput.isEmpty()) {
-            return new String[]{""};
-        }
+        String[] tokens = parsableInput.split(finalDelimiter);
 
-        return parsableInput.split(finalDelimiter);
+        return tokens;
     }
 }
