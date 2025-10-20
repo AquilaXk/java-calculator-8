@@ -25,8 +25,8 @@ public class Validator {
             throw new IllegalArgumentException("정수가 아닌 값이 포함되어있습니다.");
         }
 
-        if (num.compareTo(BigDecimal.ZERO) < 0) {
-            throw new IllegalArgumentException("음수를 입력했습니다.");
+        if (num.compareTo(BigDecimal.ZERO) <= 0) {
+            throw new IllegalArgumentException("0 또는 음수를 입력했습니다.");
         }
 
         return num;
