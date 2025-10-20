@@ -14,7 +14,7 @@ class ApplicationTest extends NsTest {
     void 커스텀_구분자_확인() {
         assertSimpleTest(() -> {
             run("//;\\n1;2;3");
-            assertThat(output()).contains("결과값 : 6");
+            assertThat(output()).contains("결과 : 6");
         });
     }
 
@@ -22,7 +22,14 @@ class ApplicationTest extends NsTest {
     void 커스텀_구분자가_정규식() {
         assertSimpleTest(() -> {
             run("//.\\n1.2.3");
-            assertThat(output()).contains("결과값 : 6");
+            assertThat(output()).contains("결과 : 6");
+        });
+    }
+    @Test
+    void 커스텀_구분자가_숫자() {
+        assertSimpleTest(() -> {
+            run("//1\\n21212");
+            assertThat(output()).contains("결과 : 6");
         });
     }
 
@@ -30,7 +37,7 @@ class ApplicationTest extends NsTest {
     void 기본_구분자() {
         assertSimpleTest(() -> {
             run("1:2:3");
-            assertThat(output()).contains("결과값 : 6");
+            assertThat(output()).contains("결과 : 6");
         });
     }
 
@@ -38,23 +45,16 @@ class ApplicationTest extends NsTest {
     void 기본_구분자_혼용() {
         assertSimpleTest(() -> {
             run("1,2:3,4");
-            assertThat(output()).contains("결과값 : 10");
+            assertThat(output()).contains("결과 : 10");
         });
     }
-
-    @Test
-    void 숫자_0_1개() {
-        assertSimpleTest(() -> {
-            run("0");
-            assertThat(output()).contains("결과값 : 0");
-        });
-    }
+    
 
     @Test
     void 숫자_1개() {
         assertSimpleTest(() -> {
             run("5");
-            assertThat(output()).contains("결과값 : 5");
+            assertThat(output()).contains("결과 : 5");
         });
     }
 

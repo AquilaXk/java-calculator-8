@@ -22,6 +22,6 @@ public class Application {
         String[] tokens = inputHandler.parseTokens();
         List<BigDecimal> numbers = Validator.validateAndConvert(tokens);
         BigDecimal result = Calculator.calculate(numbers);
-        System.out.println("결과값 : " + result);
+        System.out.println("결과 : " + result);
     }
 }
